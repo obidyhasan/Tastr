@@ -7,3 +7,19 @@
 .max-width {
   max-width: 1400px;
 }
+
+.banner-height {
+  min-height: calc(100vh - 70px);
+}
+
+.outline-text {
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: white;
+}
+
+@media screen and (max-width: 768px) {
+  .outline-text {
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: white;
+  }
+}

@@ -1,9 +1,42 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const { user, userLogout } = useAuth();
   const active = `underline font-medium`;
+  const location = useLocation();
+
+  const [headerStyle, setHeaderStyle] = useState({
+    backgroundColor: "transparent",
+    transition: "background-color 0.3s ease",
+  });
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        // Change style when scrolled down 50px or more
+        setHeaderStyle({
+          backgroundColor: "rgb(17, 17, 17, .80)", // Example color
+          transition: "background-color 0.3s ease",
+        });
+      } else {
+        // Reset style when at the top
+        setHeaderStyle({
+          backgroundColor: "transparent",
+          transition: "background-color 0.3s ease",
+        });
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Cleanup the listener on unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const navLinks = (
     <div className="flex gap-3 lg:gap-5 text-base flex-col lg:flex-row">
@@ -64,15 +97,22 @@ const Navbar = () => {
   );
 
   return (
-    <div className="sticky top-0">
-      <div className="max-width mx-auto px-5">
-        <div className="navbar px-0 flex justify-between bg-base-100">
+    <div
+      style={headerStyle}
+      className={`sticky top-0 ${
+        location.pathname === "/" ? "" : "bg-base-100"
+      }`}
+    >
+      <div className="max-width mx-auto px-5 py-[3px]">
+        <div className="navbar px-0 flex justify-between ">
           <div className="">
             <div className="dropdown">
               <div
                 tabIndex={0}
                 role="button"
-                className="btn btn-ghost bg-base-200 mr-4 lg:hidden"
+                className={`btn btn-ghost mr-4 lg:hidden ${
+                  location.pathname === "/" ? "border-white" : "bg-base-200"
+                }`}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -91,12 +131,12 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-4 shadow"
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-4 shadow text-black"
               >
                 {navLinks}
               </ul>
             </div>
-            <Link to={"/"} className="text-3xl font-oswald font-bold">
+            <Link to={"/"} className="text-4xl font-oswald font-bold">
               Tastr
             </Link>
           </div>
@@ -105,12 +145,12 @@ const Navbar = () => {
           </div>
           <div className="">
             {user ? (
-              <div className="flex gap-2">
+              <div className="flex gap-2 items-center">
                 <div className="dropdown dropdown-end">
                   <div
                     tabIndex={0}
                     role="button"
-                    className="btn btn-ghost btn-circle avatar"
+                    className="btn btn-ghost btn-circle flex items-center avatar"
                   >
                     <div className="w-11 h-11 border rounded-full">
                       <img alt="" src={user?.photoURL} />
@@ -118,17 +158,31 @@ const Navbar = () => {
                   </div>
                   <ul
                     tabIndex={0}
-                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-4 shadow"
+                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-4 shadow text-black"
                   >
                     {privateLinks}
                   </ul>
                 </div>
-                <button onClick={userLogout} className="btn">
+                <button
+                  onClick={userLogout}
+                  className={`btn ${
+                    location.pathname === "/"
+                      ? "btn-outline text-white hover:border-white hover:bg-white hover:text-black"
+                      : ""
+                  }`}
+                >
                   Logout
                 </button>
               </div>
             ) : (
-              <Link to={"/login"} className="btn">
+              <Link
+                to={"/login"}
+                className={`btn ${
+                  location.pathname === "/"
+                    ? "btn-outline text-white hover:border-white hover:bg-white hover:text-black"
+                    : ""
+                }`}
+              >
                 Login
               </Link>
             )}
