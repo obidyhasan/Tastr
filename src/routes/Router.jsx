@@ -11,6 +11,7 @@ import MyOrder from "../pages/MyOrder/MyOrder";
 import Purchase from "../pages/Purchase/Purchase";
 import FoodDetails from "../pages/FoodDetails/FoodDetails";
 import AllFoods from "../pages/AllFoods/AllFoods";
+import PrivateRoute from "./PrivateRoute";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -37,11 +38,19 @@ const Router = () => {
         },
         {
           path: "/my-foods",
-          element: <MyFoods></MyFoods>,
+          element: (
+            <PrivateRoute>
+              <MyFoods></MyFoods>
+            </PrivateRoute>
+          ),
         },
         {
           path: "/add-food",
-          element: <AddFood></AddFood>,
+          element: (
+            <PrivateRoute>
+              <AddFood></AddFood>
+            </PrivateRoute>
+          ),
         },
         {
           path: "/gallery",
@@ -49,7 +58,11 @@ const Router = () => {
         },
         {
           path: "/my-orders",
-          element: <MyOrder></MyOrder>,
+          element: (
+            <PrivateRoute>
+              <MyOrder></MyOrder>
+            </PrivateRoute>
+          ),
         },
         {
           path: "/purchase/:id",
