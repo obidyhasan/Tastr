@@ -10,6 +10,7 @@ import Gallery from "../pages/Gallery/Gallery";
 import MyOrder from "../pages/MyOrder/MyOrder";
 import Purchase from "../pages/Purchase/Purchase";
 import FoodDetails from "../pages/FoodDetails/FoodDetails";
+import AllFoods from "../pages/AllFoods/AllFoods";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -21,6 +22,10 @@ const Router = () => {
         {
           path: "/",
           element: <Home></Home>,
+        },
+        {
+          path: "/all-foods",
+          element: <AllFoods></AllFoods>,
         },
         {
           path: "/login",

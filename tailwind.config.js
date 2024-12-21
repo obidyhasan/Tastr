@@ -7,6 +7,7 @@ export default {
     extend: {
       fontFamily: {
         poppins: ["Poppins", "serif"],
+        oswald: ["Oswald", "serif"],
       },
     },
   },
