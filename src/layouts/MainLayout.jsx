@@ -1,8 +1,15 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import useAuth from "../hooks/useAuth";
+import LoadingLayout from "./LoadingLayout";
 // import Footer from "../components/Footer";
 
 const MainLayout = () => {
+  const { loading } = useAuth();
+  if (loading) {
+    return <LoadingLayout></LoadingLayout>;
+  }
+
   return (
     <div className="font-poppins">
       <Navbar></Navbar>
