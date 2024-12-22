@@ -63,16 +63,17 @@ const Purchase = () => {
     const foodId = _id;
     const buyerName = user?.displayName;
     const buyerEmail = user?.email;
-    const buyingData = Date.now();
+    const buyingDate = Date.now();
 
     const orderFood = {
       foodId,
       name,
+      image,
       price,
       orderQuantity,
       buyerName,
       buyerEmail,
-      buyingData,
+      buyingDate,
     };
 
     console.log(orderFood);
