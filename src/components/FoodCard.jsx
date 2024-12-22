@@ -1,8 +1,17 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const FoodCard = ({ food }) => {
-  const { name, description, image, price, category, quantity, purchaseCount } =
-    food;
+  const {
+    _id,
+    name,
+    description,
+    image,
+    price,
+    category,
+    quantity,
+    purchaseCount,
+  } = food;
 
   return (
     <div className="rounded-xl border p-4 flex flex-col gap-5">
@@ -35,7 +44,9 @@ const FoodCard = ({ food }) => {
             Quantity: <span className="font-medium">{quantity}</span>
           </p>
         </div>
-        <button className="btn">View Details</button>
+        <Link to={`/food-details/${_id}`} className="btn">
+          View Details
+        </Link>
       </div>
     </div>
   );

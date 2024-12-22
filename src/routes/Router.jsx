@@ -71,6 +71,8 @@ const Router = () => {
         {
           path: "/food-details/:id",
           element: <FoodDetails></FoodDetails>,
+          loader: ({ params }) =>
+            fetch(`http://localhost:5000/api/foods-details/${params.id}`),
         },
       ],
     },

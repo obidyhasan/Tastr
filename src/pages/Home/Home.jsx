@@ -1,5 +1,6 @@
 import Navbar from "../../components/Navbar";
 import BannerSection from "./BannerSection";
+import TopFoodsSection from "./TopFoodsSection";
 
 const Home = () => {
   return (
@@ -13,7 +14,8 @@ const Home = () => {
           <BannerSection></BannerSection>
         </header>
       </div>
-      <section className="min-h-screen"></section>
+
+      <TopFoodsSection></TopFoodsSection>
     </div>
   );
 };
