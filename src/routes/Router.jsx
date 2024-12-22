@@ -66,13 +66,19 @@ const Router = () => {
         },
         {
           path: "/purchase/:id",
-          element: <Purchase></Purchase>,
+          element: (
+            <PrivateRoute>
+              <Purchase></Purchase>
+            </PrivateRoute>
+          ),
+          loader: ({ params }) =>
+            fetch(`http://localhost:5000/api/foods/${params.id}`),
         },
         {
           path: "/food-details/:id",
           element: <FoodDetails></FoodDetails>,
           loader: ({ params }) =>
-            fetch(`http://localhost:5000/api/foods-details/${params.id}`),
+            fetch(`http://localhost:5000/api/foods/${params.id}`),
         },
       ],
     },

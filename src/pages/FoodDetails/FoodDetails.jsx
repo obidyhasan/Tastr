@@ -1,9 +1,17 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 const FoodDetails = () => {
   const loaderData = useLoaderData();
-  const { name, description, image, price, category, quantity, purchaseCount } =
-    loaderData;
+  const {
+    _id,
+    name,
+    description,
+    image,
+    price,
+    category,
+    quantity,
+    purchaseCount,
+  } = loaderData;
 
   return (
     <div className="max-width mx-auto px-5 py-5 ">
@@ -34,7 +42,9 @@ const FoodDetails = () => {
               Quantity: <span className="">{quantity}</span>
             </p>
 
-            <button className="btn">Purchase</button>
+            <Link to={`/purchase/${_id}`} className="btn">
+              Purchase
+            </Link>
           </div>
         </div>
       </div>
