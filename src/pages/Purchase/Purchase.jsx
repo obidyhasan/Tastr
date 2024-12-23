@@ -76,8 +76,6 @@ const Purchase = () => {
       buyingDate,
     };
 
-    console.log(orderFood);
-
     axios
       .post("http://localhost:5000/api/orders", orderFood)
       .then((res) => {
