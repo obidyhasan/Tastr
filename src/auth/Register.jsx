@@ -1,27 +1,10 @@
-import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
-import { Bounce, toast } from "react-toastify";
 import useAuth from "../hooks/useAuth";
-import Swal from "sweetalert2";
+import { showErrorMessage, showSuccessMessage } from "../utility/toastUtils";
 
 const Register = () => {
-  const { userRegister, googleAuthentication, userProfileUpdate, setLoading } =
-    useAuth();
+  const { userRegister, userProfileUpdate, setLoading } = useAuth();
   const navigate = useNavigate();
-
-  function showErrorMessage(message) {
-    toast.error(message, {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      transition: Bounce,
-    });
-  }
 
   function handelUserRegister(e) {
     e.preventDefault();
@@ -57,10 +40,7 @@ const Register = () => {
         userProfileUpdate(userInfo)
           .then(() => {
             setLoading(false);
-            Swal.fire({
-              text: "You are successfully register",
-              icon: "success",
-            });
+            showSuccessMessage("Register successfully");
             navigate("/");
           })
           .catch((error) => {
@@ -71,22 +51,6 @@ const Register = () => {
       .catch((error) => {
         setLoading(false);
         showErrorMessage("Something went wrong!");
-        console.log(error);
-      });
-  }
-
-  function handelGoogleLogin() {
-    googleAuthentication()
-      .then(() => {
-        setLoading(false);
-        Swal.fire({
-          text: "You are successfully register",
-          icon: "success",
-        });
-        navigate("/");
-      })
-      .catch((error) => {
-        setLoading(false);
         console.log(error);
       });
   }
@@ -102,20 +66,10 @@ const Register = () => {
           Access to all features. No credit card require.
         </p>
 
-        <button
-          onClick={handelGoogleLogin}
-          className="btn btn-outline border-gray-200 font-medium rounded w-full mt-6"
+        <form
+          onSubmit={handelUserRegister}
+          className="flex flex-col gap-4 mt-10"
         >
-          <FcGoogle className="text-xl"></FcGoogle> Sign up with Google
-        </button>
-
-        <div className="flex items-center my-5">
-          <div className="h-[1px] border-t-[1px] flex-1"></div>
-          <p className="px-5 text-gray-500">Or continue with</p>
-          <div className="h-[1px] border-t-[1px] flex-1"></div>
-        </div>
-
-        <form onSubmit={handelUserRegister} className="flex flex-col gap-4">
           <div className="form-control">
             <label className="mb-2">
               <span className="label-text text-gray-600">Full Name *</span>

@@ -1,8 +1,8 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import { Bounce, toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { showErrorMessage, showSuccessMessage } from "../../utility/toastUtils";
 
 const Purchase = () => {
   const loaderData = useLoaderData();
@@ -28,34 +28,6 @@ const Purchase = () => {
 
     setButtonDisable(false);
   }, [orderQuantity, quantity]);
-
-  function showErrorMessage(message) {
-    toast.error(message, {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      transition: Bounce,
-    });
-  }
-
-  function showSuccessMessage(message) {
-    toast.success(message, {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      transition: Bounce,
-    });
-  }
 
   function handelPurchaseFood(e) {
     e.preventDefault();

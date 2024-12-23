@@ -1,30 +1,14 @@
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Bounce, toast } from "react-toastify";
-
 import { useContext } from "react";
 import AuthContext from "../contexts/AuthContext";
-import Swal from "sweetalert2";
+import { showErrorMessage, showSuccessMessage } from "../utility/toastUtils";
 
 const Login = () => {
   const { userLogin, setLoading, googleAuthentication } =
     useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-
-  function showErrorMessage(message) {
-    toast.error(message, {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      transition: Bounce,
-    });
-  }
 
   function handelOnSubmit(e) {
     e.preventDefault();
@@ -40,10 +24,7 @@ const Login = () => {
     userLogin(email, password)
       .then(() => {
         setLoading(false);
-        Swal.fire({
-          text: "You are successfully login",
-          icon: "success",
-        });
+        showSuccessMessage("Login successfully");
         navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
@@ -58,10 +39,7 @@ const Login = () => {
     googleAuthentication()
       .then(() => {
         setLoading(false);
-        Swal.fire({
-          text: "You are successfully login",
-          icon: "success",
-        });
+        showSuccessMessage("Login successfully");
         navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {

@@ -1,42 +1,14 @@
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import { Bounce, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { showErrorMessage, showSuccessMessage } from "../../utility/toastUtils";
 
 const AddFood = () => {
   const { user } = useAuth();
   const axiosInstance = useAxiosSecure();
   const navigate = useNavigate();
   const [category, setCategory] = useState("Choose your Category");
-
-  function showErrorMessage(message) {
-    toast.error(message, {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      transition: Bounce,
-    });
-  }
-
-  function showSuccessMessage(message) {
-    toast.success(message, {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      transition: Bounce,
-    });
-  }
 
   function handelAddFoodSubmit(e) {
     e.preventDefault();

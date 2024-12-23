@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import { useRef, useState } from "react";
-import { Bounce, toast } from "react-toastify";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import useAuth from "../hooks/useAuth";
+import { showErrorMessage, showSuccessMessage } from "../utility/toastUtils";
 
 const MyFoodCard = ({ food }) => {
   const updateModal = useRef(null);
@@ -23,34 +23,6 @@ const MyFoodCard = ({ food }) => {
   } = updateFood;
 
   const [category, setCategory] = useState(getCategory);
-
-  function showErrorMessage(message) {
-    toast.error(message, {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      transition: Bounce,
-    });
-  }
-
-  function showSuccessMessage(message) {
-    toast.success(message, {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      transition: Bounce,
-    });
-  }
 
   function handelUpdateFood(e) {
     e.preventDefault();
