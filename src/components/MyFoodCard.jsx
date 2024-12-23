@@ -1,11 +1,14 @@
 import PropTypes from "prop-types";
 import { useRef, useState } from "react";
 import { Bounce, toast } from "react-toastify";
-import axios from "axios";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import useAuth from "../hooks/useAuth";
 
 const MyFoodCard = ({ food }) => {
   const updateModal = useRef(null);
   const [updateFood, setUpdateFood] = useState(food);
+  const axiosInstance = useAxiosSecure();
+  const { user } = useAuth();
 
   const {
     _id,
@@ -72,8 +75,8 @@ const MyFoodCard = ({ food }) => {
       );
     }
 
-    axios
-      .patch(`http://localhost:5000/api/foods/${_id}`, foodInfo)
+    axiosInstance
+      .patch(`/api/foods/${_id}?email=${user?.email}`, foodInfo)
       .then((res) => {
         if (res.data.modifiedCount) {
           showSuccessMessage("Food updated successfully");

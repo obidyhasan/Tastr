@@ -1,20 +1,21 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import moment from "moment";
 import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyOrder = () => {
   const { user } = useAuth();
+  const axiosInstance = useAxiosSecure();
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/orders?email=${user?.email}`)
+    axiosInstance
+      .get(`/api/orders?email=${user?.email}`)
       .then((res) => setOrders(res.data))
       .catch((error) => console.log(error));
-  }, [user?.email]);
+  });
 
   function handelDeleteOrder(id) {
     Swal.fire({
@@ -27,8 +28,8 @@ const MyOrder = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .delete(`http://localhost:5000/api/orders/${id}`)
+        axiosInstance
+          .delete(`/api/orders/${id}?email=${user?.email}`)
           .then((res) => {
             if (res.data.deletedCount) {
               const remainingOrder = orders.filter((order) => order._id !== id);

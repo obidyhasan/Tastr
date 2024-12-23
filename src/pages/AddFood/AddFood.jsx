@@ -1,11 +1,12 @@
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { Bounce, toast } from "react-toastify";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const AddFood = () => {
   const { user } = useAuth();
+  const axiosInstance = useAxiosSecure();
   const navigate = useNavigate();
   const [category, setCategory] = useState("Choose your Category");
 
@@ -63,8 +64,8 @@ const AddFood = () => {
       );
     }
 
-    axios
-      .post("http://localhost:5000/api/foods", foodInfo)
+    axiosInstance
+      .post(`/api/foods?email=${user?.email}`, foodInfo)
       .then((res) => {
         if (res.data.insertedId) {
           showSuccessMessage("Food Added Successfully");

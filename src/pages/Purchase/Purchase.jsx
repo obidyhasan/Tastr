@@ -1,12 +1,13 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { Bounce, toast } from "react-toastify";
-import axios from "axios";
 import { useEffect, useState } from "react";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Purchase = () => {
   const loaderData = useLoaderData();
   const { user } = useAuth();
+  const axiosInstance = useAxiosSecure();
   const [orderQuantity, setOrderQuantity] = useState(1);
   const [buttonDisable, setButtonDisable] = useState(false);
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const Purchase = () => {
     }
 
     setButtonDisable(false);
-  }, [orderQuantity]);
+  }, [orderQuantity, quantity]);
 
   function showErrorMessage(message) {
     toast.error(message, {
@@ -76,8 +77,8 @@ const Purchase = () => {
       buyingDate,
     };
 
-    axios
-      .post("http://localhost:5000/api/orders", orderFood)
+    axiosInstance
+      .post(`/api/orders?email=${user?.email}`, orderFood)
       .then((res) => {
         if (res.data.insertedId) {
           showSuccessMessage("Order Confirmed");
