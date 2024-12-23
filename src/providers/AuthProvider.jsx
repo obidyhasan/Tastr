@@ -11,6 +11,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import axios from "axios";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -29,12 +30,27 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        setUser(currentUser);
+      setUser(currentUser);
+      if (currentUser?.email) {
+        const user = { email: currentUser.email };
+        axios
+          .post("http://localhost:5000/api/jwt", user, {
+            withCredentials: true,
+          })
+          .then(() => {})
+          .catch((error) => console.log(error));
+        setLoading(false);
       } else {
-        setUser(null);
+        axios
+          .post(
+            "http://localhost:5000/api/jwt/logout",
+            {},
+            { withCredentials: true }
+          )
+          .then(() => {})
+          .catch((error) => console.log(error));
+        setLoading(false);
       }
-      setLoading(false);
     });
 
     return () => {

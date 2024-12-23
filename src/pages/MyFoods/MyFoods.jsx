@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import MyFoodCard from "../../components/MyFoodCard";
-import axios from "axios";
 import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyFoods = () => {
   const { user } = useAuth();
+  const axiosInstance = useAxiosSecure();
   const [foods, setFoods] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/my-foods?email=${user?.email}`)
+    axiosInstance
+      .get(`/api/my-foods?email=${user?.email}`)
       .then((res) => setFoods(res.data))
       .catch((error) => console.log(error));
-  }, [user?.email]);
+  });
 
   return (
     <div>
