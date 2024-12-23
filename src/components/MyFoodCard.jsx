@@ -1,17 +1,16 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const FoodCard = ({ food }) => {
+const MyFoodCard = ({ food }) => {
   const {
-    _id,
     name,
     description,
+    origin,
     image,
     price,
     category,
     quantity,
     purchaseCount,
-    origin,
   } = food;
 
   return (
@@ -48,16 +47,14 @@ const FoodCard = ({ food }) => {
             Quantity: <span className="font-medium">{quantity}</span>
           </p>
         </div>
-        <Link to={`/food-details/${_id}`} className="btn">
-          View Details
-        </Link>
+        <Link className="btn">Update Food</Link>
       </div>
     </div>
   );
 };
 
-FoodCard.propTypes = {
+MyFoodCard.propTypes = {
   food: PropTypes.object,
 };
 
-export default FoodCard;
+export default MyFoodCard;
