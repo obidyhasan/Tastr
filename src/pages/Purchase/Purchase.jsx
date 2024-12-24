@@ -62,8 +62,10 @@ const Purchase = () => {
 
   return (
     <div>
-      <div className="w-full bg-all-food-bg h-72 bg-no-repeat bg-center bg-cover flex flex-col items-center justify-center px-5">
-        <h1 className="text-white font-bold text-5xl text-center">Checkout</h1>
+      <div className="w-full bg-food-purchase-bg h-72 bg-no-repeat bg-center bg-cover flex flex-col items-center justify-center px-5">
+        <h1 className="text-white font-bold sm:text-5xl text-4xl text-center">
+          Checkout
+        </h1>
         <p className="text-center text-gray-200 mt-2">
           Finalize your order and get ready to enjoy your meal.
         </p>

@@ -49,8 +49,10 @@ const AddFood = () => {
 
   return (
     <div>
-      <div className="w-full bg-all-food-bg h-72 bg-no-repeat bg-center bg-cover flex flex-col items-center justify-center px-5">
-        <h1 className="text-white font-bold text-5xl text-center">Add Food</h1>
+      <div className="w-full bg-add-food-bg h-72 bg-no-repeat bg-center bg-cover flex flex-col items-center justify-center px-5">
+        <h1 className="text-white font-bold  text-4xl sm:text-5xl text-center">
+          Add Food
+        </h1>
         <p className="text-center text-gray-200 mt-2">
           Share the taste of your masterpiece by adding your favorite food items
         </p>
