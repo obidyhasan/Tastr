@@ -1,4 +1,5 @@
 import Navbar from "../../components/Navbar";
+import ActionSection from "./ActionSection";
 import BannerSection from "./BannerSection";
 import TopFoodsSection from "./TopFoodsSection";
 
@@ -16,6 +17,7 @@ const Home = () => {
       </div>
 
       <TopFoodsSection></TopFoodsSection>
+      <ActionSection></ActionSection>
     </div>
   );
 };
