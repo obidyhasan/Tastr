@@ -1,6 +1,7 @@
 import Navbar from "../../components/Navbar";
 import ActionSection from "./ActionSection";
 import BannerSection from "./BannerSection";
+import CategoryFoodSection from "./CategoryFoodSection";
 import TopFoodsSection from "./TopFoodsSection";
 
 const Home = () => {
@@ -18,6 +19,7 @@ const Home = () => {
 
       <TopFoodsSection></TopFoodsSection>
       <ActionSection></ActionSection>
+      <CategoryFoodSection></CategoryFoodSection>
     </div>
   );
 };
