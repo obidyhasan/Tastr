@@ -11,7 +11,7 @@ const Purchase = () => {
   const [orderQuantity, setOrderQuantity] = useState(1);
   const [buttonDisable, setButtonDisable] = useState(false);
   const navigate = useNavigate();
-  const { _id, name, image, price, quantity } = loaderData;
+  const { _id, name, image, price, quantity, addByEmail } = loaderData;
 
   useEffect(() => {
     // Quantity Validation
@@ -128,8 +128,15 @@ const Purchase = () => {
                     required
                   />
                 </div>
+
+                {addByEmail === user?.email && (
+                  <div>
+                    <h1 className="text-sm mt-2 text-orange-500">{`You can't purchase this food. Because it's your added food.`}</h1>
+                  </div>
+                )}
+
                 <div className="form-control mt-6">
-                  {buttonDisable ? (
+                  {buttonDisable || addByEmail === user?.email ? (
                     <button disabled className="btn">
                       Purchase
                     </button>

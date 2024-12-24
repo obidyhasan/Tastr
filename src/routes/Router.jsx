@@ -72,13 +72,13 @@ const Router = () => {
             </PrivateRoute>
           ),
           loader: ({ params }) =>
-            fetch(`http://localhost:5000/api/foods/${params.id}`),
+            fetch(`https://tastr-server.vercel.app/api/foods/${params.id}`),
         },
         {
           path: "/food-details/:id",
           element: <FoodDetails></FoodDetails>,
           loader: ({ params }) =>
-            fetch(`http://localhost:5000/api/foods/${params.id}`),
+            fetch(`https://tastr-server.vercel.app/api/foods/${params.id}`),
         },
       ],
     },

@@ -34,7 +34,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser?.email) {
         const user = { email: currentUser.email };
         axios
-          .post("http://localhost:5000/api/jwt", user, {
+          .post("https://tastr-server.vercel.app/api/jwt", user, {
             withCredentials: true,
           })
           .then(() => {})
@@ -43,7 +43,7 @@ const AuthProvider = ({ children }) => {
       } else {
         axios
           .post(
-            "http://localhost:5000/api/jwt/logout",
+            "https://tastr-server.vercel.app/api/jwt/logout",
             {},
             { withCredentials: true }
           )

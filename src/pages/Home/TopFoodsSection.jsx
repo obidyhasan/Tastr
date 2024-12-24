@@ -9,7 +9,7 @@ const TopFoodsSection = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/top-foods")
+      .get("https://tastr-server.vercel.app/api/top-foods")
       .then((res) => setFoods(res.data))
       .catch((error) => {
         console.log(error);

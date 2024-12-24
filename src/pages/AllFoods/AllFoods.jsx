@@ -10,7 +10,7 @@ const AllFoods = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/foods")
+      .get("https://tastr-server.vercel.app/api/foods")
       .then((res) => setFoods(res.data))
       .catch((error) => {
         console.log(error);
@@ -19,7 +19,7 @@ const AllFoods = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/foods?search=${searchFood}`)
+      .get(`https://tastr-server.vercel.app/api/foods?search=${searchFood}`)
       .then((res) => setFoods(res.data))
       .catch((error) => {
         console.log(error);
