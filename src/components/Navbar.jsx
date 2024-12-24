@@ -1,11 +1,13 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { useEffect, useState } from "react";
+import useTheme from "../hooks/useTheme";
 
 const Navbar = () => {
   const { user, userLogout } = useAuth();
   const active = `underline font-medium`;
   const location = useLocation();
+  const { theme, toggleTheme } = useTheme();
 
   const [headerStyle, setHeaderStyle] = useState({
     backgroundColor: "transparent",
@@ -93,6 +95,9 @@ const Navbar = () => {
       >
         My Orders
       </NavLink>
+      <button className="btn btn-sm" onClick={toggleTheme}>
+        {theme === "light" ? "Dark Mode" : "Light Mode"}
+      </button>
     </div>
   );
 
@@ -158,7 +163,7 @@ const Navbar = () => {
                   </div>
                   <ul
                     tabIndex={0}
-                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-4 shadow text-black"
+                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-4 shadow text-primary"
                   >
                     {privateLinks}
                   </ul>

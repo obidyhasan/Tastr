@@ -15,7 +15,7 @@ const FoodCard = ({ food }) => {
   } = food;
 
   return (
-    <div className="rounded-xl border p-4 flex flex-col gap-5">
+    <div className="rounded-xl border border-base-200 p-4 flex flex-col gap-5">
       <div className="flex-1">
         <figure>
           <img
@@ -39,7 +39,7 @@ const FoodCard = ({ food }) => {
         <p>
           Origin: <span className="font-medium">{origin}</span>
         </p>
-        <hr />
+        <hr className="border-base-200" />
         <div className="flex justify-between items-center gap-2">
           <span className="badge badge-md badge-neutral">
             {purchaseCount} sold

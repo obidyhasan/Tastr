@@ -67,9 +67,9 @@ const Login = () => {
         </button>
 
         <div className="flex items-center my-5">
-          <div className="h-[1px] border-t-[1px] flex-1"></div>
+          <div className="h-[1px] border-t-[1px] flex-1 border-base-200"></div>
           <p className="px-5 text-gray-500">Or continue with</p>
-          <div className="h-[1px] border-t-[1px] flex-1"></div>
+          <div className="h-[1px] border-t-[1px] flex-1 border-base-200"></div>
         </div>
 
         <form onSubmit={handelOnSubmit} className="flex flex-col gap-4">
@@ -98,7 +98,7 @@ const Login = () => {
             />
           </div>
           <div className="form-control mt-5">
-            <button className="btn btn-primary rounded bg-textColor border-none text-white">
+            <button className="btn rounded bg-textColor border-none text-primary">
               Login
             </button>
           </div>

@@ -28,4 +28,29 @@ export default {
     },
   },
   plugins: [daisyui],
+  daisyui: {
+    themes: [
+      {
+        light: {
+          primary: "#000000",
+          secondary: "#F000B8",
+          accent: "#37CDBE",
+          neutral: "#3D4451",
+          "base-100": "#FFFFFF",
+        },
+      },
+      {
+        dark: {
+          primary: "#FFFFFF",
+          secondary: "#9333EA",
+          accent: "#22D3EE",
+          neutral: "#111827",
+          "base-100": "#1c1c1d",
+          "base-200": "#252728",
+        },
+      },
+      "cupcake", // Prebuilt themes
+      "dracula", // Add more prebuilt themes here
+    ],
+  },
 };

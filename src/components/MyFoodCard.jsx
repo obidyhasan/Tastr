@@ -60,7 +60,7 @@ const MyFoodCard = ({ food }) => {
   }
 
   return (
-    <div className="rounded-xl border p-4 flex flex-col gap-5">
+    <div className="rounded-xl border border-base-200 p-4 flex flex-col gap-5">
       <div className="flex-1">
         <figure>
           <img
@@ -84,7 +84,7 @@ const MyFoodCard = ({ food }) => {
         <p>
           Origin: <span className="font-medium">{origin}</span>
         </p>
-        <hr />
+        <hr className="border-base-200" />
         <div className="flex justify-between items-center gap-2">
           <span className="badge badge-md badge-neutral">
             {purchaseCount} sold
@@ -103,16 +103,16 @@ const MyFoodCard = ({ food }) => {
       <dialog ref={updateModal} className="modal">
         <div className="modal-box max-w-5xl">
           <form method="dialog">
-            <button className=" btn btn-sm btn-circle btn-ghost absolute right-2 top-2 bg-gray-100">
+            <button className=" btn btn-sm btn-circle btn-ghost bg-base-200 absolute right-2 top-2">
               ✕
             </button>
           </form>
           <div className="text-center mt-2">
             <h1 className="font-semibold text-3xl">Update Food</h1>
-            <p className="mt-2 mb-5 text-gray-600">
+            <p className="mt-2 mb-5 text-gray-500">
               Modify existing food details effortlessly
             </p>
-            <hr />
+            <hr className="border-base-200" />
           </div>
           <div className="max-width mx-auto mt-5 text-center flex flex-col">
             <div className="w-full">

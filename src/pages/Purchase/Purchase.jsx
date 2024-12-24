@@ -72,7 +72,7 @@ const Purchase = () => {
       </div>
 
       <div className="max-width mx-auto px-5 py-5">
-        <div className="flex gap-5 flex-col md:flex-row border p-5 rounded-lg my-10">
+        <div className="flex gap-5 flex-col md:flex-row border border-base-200 p-5 rounded-lg my-10">
           <div className="w-full md:w-2/5">
             <figure className="w-full h-full">
               <img
@@ -88,14 +88,14 @@ const Purchase = () => {
               <div className="space-y-2">
                 <h1 className="font-semibold text-xl">{name}</h1>
                 <div className="flex justify-between items-center gap-2">
-                  <p className="text-base text-gray-600">
+                  <p className="text-base text-gray-500">
                     Available Quantity: <span className="">{quantity}</span>
                   </p>
                   <p className="font-semibold text-lg text-orange-500">
                     ${price}
                   </p>
                 </div>
-                <hr />
+                <hr className="border-base-200" />
               </div>
               <form onSubmit={handelPurchaseFood} className="">
                 <div className="form-control">

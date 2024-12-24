@@ -59,7 +59,7 @@ const AddFood = () => {
       </div>
 
       <div className="max-width mx-auto px-5 my-16 text-center flex flex-col">
-        <div className="w-full border p-4 rounded-lg">
+        <div className="w-full border border-base-200 p-4 rounded-lg">
           <form onSubmit={handelAddFoodSubmit} className="space-y-3">
             {/* Item 1 */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -182,7 +182,7 @@ const AddFood = () => {
               ></textarea>
             </div>
 
-            <div className="form-control mt-6">
+            <div className="form-control mt-6 pt-3">
               <button className="btn ">Add Your Food</button>
             </div>
           </form>
