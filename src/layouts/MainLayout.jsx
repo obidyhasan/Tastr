@@ -2,6 +2,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import useAuth from "../hooks/useAuth";
 import LoadingLayout from "./LoadingLayout";
+import Footer from "../components/Footer";
 // import Footer from "../components/Footer";
 
 const MainLayout = () => {
@@ -15,7 +16,7 @@ const MainLayout = () => {
     <div className="font-poppins">
       {location.pathname !== "/" && <Navbar></Navbar>}
       <Outlet></Outlet>
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
     </div>
   );
 };
