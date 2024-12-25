@@ -9,7 +9,7 @@ const axiosInstance = axios.create({
 });
 
 const useAxiosSecure = () => {
-  const { userLogout } = useAuth();
+  const { userLogout, setLoading } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,6 +21,7 @@ const useAxiosSecure = () => {
         if (error.status === 401 || error.status === 403) {
           userLogout()
             .then(() => {
+              setLoading(false);
               navigate("/login");
             })
             .catch((error) => console.log(error));

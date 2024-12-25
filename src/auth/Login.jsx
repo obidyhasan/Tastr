@@ -25,7 +25,15 @@ const Login = () => {
       .then(() => {
         setLoading(false);
         showSuccessMessage("Login successfully");
-        navigate(`${location.state ? location.state : "/"}`);
+        navigate(
+          `${
+            location.state &&
+            location.state !== "/my-foods" &&
+            location.state !== "/my-orders"
+              ? location.state
+              : "/"
+          }`
+        );
       })
       .catch((error) => {
         setLoading(false);
@@ -40,7 +48,14 @@ const Login = () => {
       .then(() => {
         setLoading(false);
         showSuccessMessage("Login successfully");
-        navigate(`${location.state ? location.state : "/"}`);
+        navigate(
+          `${
+            location.state &&
+            (location.state !== "/my-foods" || location.state !== "/my-orders")
+              ? location.state
+              : "/"
+          }`
+        );
       })
       .catch((error) => {
         setLoading(false);
