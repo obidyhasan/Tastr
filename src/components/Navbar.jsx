@@ -104,7 +104,7 @@ const Navbar = () => {
   return (
     <div
       style={location.pathname === "/" ? headerStyle : { backgroundColor: "" }}
-      className={`sticky top-0 z-10 ${
+      className={`sticky top-0 z-20 ${
         location.pathname === "/" ? "" : "bg-base-100"
       }`}
     >

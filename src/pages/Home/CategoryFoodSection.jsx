@@ -23,12 +23,12 @@ const CategoryFoodSection = () => {
       .catch((error) => console.log(error));
   }, [foodCategory]);
 
-  console.log(foods);
-
   return (
     <div className="max-width mx-auto px-5 py-20">
       <div className="text-center">
-        <h1 className="text-4xl font-bold">Explore Our Categories</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold">
+          Explore Our Categories
+        </h1>
         <p className="mt-2">
           Discover delicious food categories crafted to satisfy every craving.
           Explore now!

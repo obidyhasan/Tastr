@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "name": "Emily Carter",
+    "image": "https://i.ibb.co.com/wBS4vmS/Ellipse-1.png",
+    "rating": 4.5,
+    "feedback": "The food was absolutely amazing! The cheeseburger is a must-try, and the staff was super friendly.",
+    "date": "2024-12-23"
+  },
+  {
+    "id": 2,
+    "name": "James Wilson",
+    "image": "https://i.ibb.co.com/jHdFwXp/profile.png",
+    "rating": 4.9,
+    "feedback": "I loved the Margherita Pizza! Fresh ingredients and authentic flavors. Highly recommended!",
+    "date": "2024-12-22"
+  },
+  {
+    "id": 3,
+    "name": "Sophia Brown",
+    "image": "https://i.ibb.co.com/ZKg98qb/Ellipse-1-1.png",
+    "rating": 4.8,
+    "feedback": "The Chocolate Lava Cake was out of this world. I’ll definitely be coming back for more!",
+    "date": "2024-12-21"
+  },
+  {
+    "id": 4,
+    "name": "Michael Johnson",
+    "image": "https://i.ibb.co.com/G0Q0HcM/Ellipse-1-2.png",
+    "rating": 4.3,
+    "feedback": "The service was quick, and the BBQ Chicken Pizza was delicious. Great experience overall.",
+    "date": "2024-12-20"
+  },
+  {
+    "id": 5,
+    "name": "Olivia Davis",
+    "image": "https://i.ibb.co.com/wBS4vmS/Ellipse-1.png",
+    "rating": 4.9,
+    "feedback": "The Caesar Salad was fresh and crisp, and the Mango Smoothie was the perfect complement.",
+    "date": "2024-12-19"
+  },
+  {
+    "id": 6,
+    "name": "Liam Martinez",
+    "image": "https://i.ibb.co.com/jHdFwXp/profile.png",
+    "rating": 4.7,
+    "feedback": "The Shrimp Tacos were incredible. Loved the salsa and creamy sauce. Will order again!",
+    "date": "2024-12-18"
+  },
+  {
+    "id": 7,
+    "name": "Charlotte Garcia",
+    "image": "https://i.ibb.co.com/ZKg98qb/Ellipse-1-1.png",
+    "rating": 4.6,
+    "feedback": "The Grilled Chicken Sandwich was tasty and fresh. The portion size was perfect.",
+    "date": "2024-12-17"
+  },
+  {
+    "id": 8,
+    "name": "Benjamin Taylor",
+    "image": "https://i.ibb.co.com/G0Q0HcM/Ellipse-1-2.png",
+    "rating": 4.4,
+    "feedback": "Fish and Chips were crispy and flavorful. Great ambiance as well.",
+    "date": "2024-12-16"
+  }
+]
