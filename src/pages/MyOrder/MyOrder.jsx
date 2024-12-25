@@ -10,6 +10,12 @@ const MyOrder = () => {
   const axiosInstance = useAxiosSecure();
   const [orders, setOrders] = useState([]);
 
+  // Loading
+  const [isLoading, setIsLoading] = useState(true);
+  setTimeout(() => {
+    setIsLoading(false);
+  }, 1000);
+
   useEffect(() => {
     axiosInstance
       .get(`/api/orders?email=${user?.email}`)
@@ -58,67 +64,77 @@ const MyOrder = () => {
         </p>
       </div>
 
-      <div className="max-width my-10 mx-auto px-5 ">
-        {orders.length ? (
-          <div className="overflow-x-auto">
-            <table className="table">
-              {/* head */}
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Name</th>
-                  <th>Price</th>
-                  <th>Order By</th>
-                  <th>Date</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {orders.map((order, idx) => (
-                  <tr key={order?._id}>
-                    <th>{idx + 1}</th>
-                    <td>
-                      <div className="flex items-center gap-3">
-                        <div className="avatar">
-                          <div className="mask mask-squircle h-12 w-12">
-                            <img
-                              src={order?.image}
-                              alt="Avatar Tailwind CSS Component"
-                            />
-                          </div>
-                        </div>
-                        <div>
-                          <div className="font-bold">{order?.name}</div>
-                          <div className="text-sm text-gray-500">
-                            Quantity:
-                            <span> {order?.orderQuantity}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-
-                    <td className="text-sm font-semibold text-orange-500">
-                      ${order?.price}
-                    </td>
-                    <td>{order?.buyerName}</td>
-                    <td>{moment(order?.buyingDate).format("D MMMM YYYY")}</td>
-                    <th>
-                      <button
-                        onClick={() => handelDeleteOrder(order?._id)}
-                        className="btn btn-error btn-sm"
-                      >
-                        <MdDeleteForever className="text-xl text-white"></MdDeleteForever>
-                      </button>
-                    </th>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+      <div>
+        {isLoading ? (
+          <div className="flex items-center justify-center min-h-80">
+            <span className="loading loading-spinner loading-lg"></span>
           </div>
         ) : (
-          <h2 className="text-xl font-semibold text-center">
-            Orders Not Found
-          </h2>
+          <div className="max-width my-10 mx-auto px-5 ">
+            {orders.length ? (
+              <div className="overflow-x-auto">
+                <table className="table">
+                  {/* head */}
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Name</th>
+                      <th>Price</th>
+                      <th>Order By</th>
+                      <th>Date</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {orders.map((order, idx) => (
+                      <tr key={order?._id}>
+                        <th>{idx + 1}</th>
+                        <td>
+                          <div className="flex items-center gap-3">
+                            <div className="avatar">
+                              <div className="mask mask-squircle h-12 w-12">
+                                <img
+                                  src={order?.image}
+                                  alt="Avatar Tailwind CSS Component"
+                                />
+                              </div>
+                            </div>
+                            <div>
+                              <div className="font-bold">{order?.name}</div>
+                              <div className="text-sm text-gray-500">
+                                Quantity:
+                                <span> {order?.orderQuantity}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+
+                        <td className="text-sm font-semibold text-orange-500">
+                          ${order?.price}
+                        </td>
+                        <td>{order?.buyerName}</td>
+                        <td>
+                          {moment(order?.buyingDate).format("D MMMM YYYY")}
+                        </td>
+                        <th>
+                          <button
+                            onClick={() => handelDeleteOrder(order?._id)}
+                            className="btn btn-error btn-sm"
+                          >
+                            <MdDeleteForever className="text-xl text-white"></MdDeleteForever>
+                          </button>
+                        </th>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <h2 className="text-xl font-semibold text-center">
+                Orders Not Found
+              </h2>
+            )}
+          </div>
         )}
       </div>
     </div>

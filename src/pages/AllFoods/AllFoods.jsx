@@ -15,6 +15,12 @@ const AllFoods = () => {
   const numberOfPage = Math.ceil(count / itemPerPage);
   const pages = [...Array(numberOfPage).keys()];
 
+  // Loading
+  const [isLoading, setIsLoading] = useState(true);
+  setTimeout(() => {
+    setIsLoading(false);
+  }, 1000);
+
   useEffect(() => {
     axios
       .get(
@@ -98,49 +104,61 @@ const AllFoods = () => {
         </div>
       </div>
 
-      {/* Food Card */}
-      <div className="max-width my-10 mx-auto px-5 ">
-        {foods.length === 0 ? (
-          <h2 className="text-xl font-semibold text-center">Foods Not Found</h2>
+      <div>
+        {isLoading ? (
+          <div className="flex items-center justify-center min-h-52">
+            <span className="loading loading-spinner loading-lg"></span>
+          </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {foods.map((food) => (
-              <FoodCard key={food._id} food={food}></FoodCard>
-            ))}
+          <div>
+            {/* Food Card */}
+            <div className="max-width my-10 mx-auto px-5 ">
+              {foods.length === 0 ? (
+                <h2 className="text-xl font-semibold text-center">
+                  Foods Not Found
+                </h2>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                  {foods.map((food) => (
+                    <FoodCard key={food._id} food={food}></FoodCard>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="flex justify-center gap-4 mb-10">
+              <button onClick={handelPrevPage} className="btn">
+                Prev
+              </button>
+              <div className="flex gap-4">
+                {pages.map((page) => (
+                  <button
+                    onClick={() => setCurrentPage(page)}
+                    className={`btn min-w-12 ${
+                      currentPage === page ? "btn-primary" : ""
+                    }`}
+                    key={page}
+                  >
+                    {page + 1}
+                  </button>
+                ))}
+              </div>
+              <button onClick={handelNextPage} className="btn">
+                Next
+              </button>
+              <select
+                value={itemPerPage}
+                onChange={handelOnChange}
+                className="select select-bordered  "
+              >
+                <option value={4}>4</option>
+                <option value={8}>8</option>
+                <option value={10}>10</option>
+                <option value={20}>20</option>
+              </select>
+            </div>
           </div>
         )}
-      </div>
-
-      <div className="flex justify-center gap-4 mb-10">
-        <button onClick={handelPrevPage} className="btn">
-          Prev
-        </button>
-        <div className="flex gap-4">
-          {pages.map((page) => (
-            <button
-              onClick={() => setCurrentPage(page)}
-              className={`btn min-w-12 ${
-                currentPage === page ? "btn-primary" : ""
-              }`}
-              key={page}
-            >
-              {page + 1}
-            </button>
-          ))}
-        </div>
-        <button onClick={handelNextPage} className="btn">
-          Next
-        </button>
-        <select
-          value={itemPerPage}
-          onChange={handelOnChange}
-          className="select select-bordered  "
-        >
-          <option value={4}>4</option>
-          <option value={8}>8</option>
-          <option value={10}>10</option>
-          <option value={20}>20</option>
-        </select>
       </div>
     </div>
   );

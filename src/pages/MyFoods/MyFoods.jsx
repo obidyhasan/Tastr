@@ -8,6 +8,12 @@ const MyFoods = () => {
   const axiosInstance = useAxiosSecure();
   const [foods, setFoods] = useState([]);
 
+  // Loading
+  const [isLoading, setIsLoading] = useState(true);
+  setTimeout(() => {
+    setIsLoading(false);
+  }, 1000);
+
   useEffect(() => {
     axiosInstance
       .get(`/api/my-foods?email=${user?.email}`)
@@ -26,15 +32,24 @@ const MyFoods = () => {
         </p>
       </div>
 
-      {/* Food Card */}
-      <div className="max-width my-16 mx-auto px-5 ">
-        {foods.length === 0 ? (
-          <h2 className="text-xl font-semibold text-center">Foods Not Found</h2>
+      <div>
+        {isLoading ? (
+          <div className="flex items-center justify-center min-h-80">
+            <span className="loading loading-spinner loading-lg"></span>
+          </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {foods.map((food) => (
-              <MyFoodCard key={food._id} food={food}></MyFoodCard>
-            ))}
+          <div className="max-width my-16 mx-auto px-5 ">
+            {foods.length === 0 ? (
+              <h2 className="text-xl font-semibold text-center">
+                Foods Not Found
+              </h2>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                {foods.map((food) => (
+                  <MyFoodCard key={food._id} food={food}></MyFoodCard>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>
