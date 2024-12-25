@@ -7,24 +7,66 @@ import { FiSearch } from "react-icons/fi";
 const AllFoods = () => {
   const [foods, setFoods] = useState([]);
   const [searchFood, setSearchFood] = useState("");
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(0);
+  const [count, setCount] = useState(0);
+  const [itemPerPage, setItemPerPage] = useState(8);
+
+  const numberOfPage = Math.ceil(count / itemPerPage);
+  const pages = [...Array(numberOfPage).keys()];
 
   useEffect(() => {
     axios
-      .get("https://tastr-server.vercel.app/api/foods")
+      .get(
+        `https://tastr-server.vercel.app/api/foods?page=${currentPage}&size=${itemPerPage}`
+      )
       .then((res) => setFoods(res.data))
       .catch((error) => {
         console.log(error);
       });
+  }, [currentPage, itemPerPage]);
+
+  useEffect(() => {
+    axios
+      .get("https://tastr-server.vercel.app/api/foodsCount")
+      .then((res) => setCount(res.data.count))
+      .catch((error) => console.log(error));
   }, []);
 
   useEffect(() => {
     axios
-      .get(`https://tastr-server.vercel.app/api/foods?search=${searchFood}`)
-      .then((res) => setFoods(res.data))
+      .get(
+        `https://tastr-server.vercel.app/api/foods?page=${currentPage}&size=${itemPerPage}&search=${searchFood}`
+      )
+      .then((res) => {
+        setFoods(res.data);
+      })
       .catch((error) => {
         console.log(error);
       });
-  }, [searchFood]);
+  }, [searchFood, currentPage, itemPerPage]);
+
+  function handelPrevPage() {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  }
+
+  function handelNextPage() {
+    if (currentPage < numberOfPage - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  }
+
+  function handelOnSearch(search) {
+    setSearchFood(search);
+    setCurrentPage(0);
+  }
+
+  function handelOnChange(e) {
+    setItemPerPage(e.target.value);
+    setCurrentPage(0);
+  }
 
   return (
     <div>
@@ -46,7 +88,7 @@ const AllFoods = () => {
         <div className="mt-5 flex justify-center">
           <label className="input input-bordered rounded-full w-full max-w-2xl flex items-center gap-2">
             <input
-              onChange={(e) => setSearchFood(e.target.value)}
+              onChange={(e) => handelOnSearch(e.target.value)}
               type="text"
               className="grow"
               placeholder="Search"
@@ -67,6 +109,38 @@ const AllFoods = () => {
             ))}
           </div>
         )}
+      </div>
+
+      <div className="flex justify-center gap-4 mb-10">
+        <button onClick={handelPrevPage} className="btn">
+          Prev
+        </button>
+        <div className="flex gap-4">
+          {pages.map((page) => (
+            <button
+              onClick={() => setCurrentPage(page)}
+              className={`btn min-w-12 ${
+                currentPage === page ? "btn-primary" : ""
+              }`}
+              key={page}
+            >
+              {page + 1}
+            </button>
+          ))}
+        </div>
+        <button onClick={handelNextPage} className="btn">
+          Next
+        </button>
+        <select
+          value={itemPerPage}
+          onChange={handelOnChange}
+          className="select select-bordered  "
+        >
+          <option value={4}>4</option>
+          <option value={8}>8</option>
+          <option value={10}>10</option>
+          <option value={20}>20</option>
+        </select>
       </div>
     </div>
   );
