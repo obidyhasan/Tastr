@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { showErrorMessage, showSuccessMessage } from "../../utility/toastUtils";
+import { Helmet } from "react-helmet";
 
 const AddFood = () => {
   const { user } = useAuth();
@@ -49,6 +50,9 @@ const AddFood = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Add Food | Tastr</title>
+      </Helmet>
       <div className="w-full bg-add-food-bg h-72 bg-no-repeat bg-center bg-cover flex flex-col items-center justify-center px-5">
         <h1 className="text-white font-bold  text-4xl sm:text-5xl text-center">
           Add Food

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { showErrorMessage, showSuccessMessage } from "../utility/toastUtils";
+import { Helmet } from "react-helmet";
 
 const Register = () => {
   const { userRegister, userProfileUpdate, setLoading } = useAuth();
@@ -57,6 +58,10 @@ const Register = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-5 font-roboto text-textColor">
+      <Helmet>
+        <title>Register | Tastr</title>
+      </Helmet>
+
       <div className=" w-full max-w-xs md:max-w-sm mx-auto py-20">
         <p className="text-blue-500 text-center text-base">Register</p>
         <h1 className="text-center font-semibold text-3xl mt-4 mb-2">

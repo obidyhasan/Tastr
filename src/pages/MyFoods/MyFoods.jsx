@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import MyFoodCard from "../../components/MyFoodCard";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const MyFoods = () => {
   const { user } = useAuth();
@@ -23,6 +24,9 @@ const MyFoods = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>My Foods | Tastr</title>
+      </Helmet>
       <div className="w-full bg-my-food-bg h-72 bg-no-repeat bg-center bg-cover flex flex-col items-center justify-center px-5">
         <h1 className="text-white font-bold text-4xl sm:text-5xl text-center">
           My Foods

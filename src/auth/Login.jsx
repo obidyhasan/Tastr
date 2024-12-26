@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../contexts/AuthContext";
 import { showErrorMessage, showSuccessMessage } from "../utility/toastUtils";
+import { Helmet } from "react-helmet";
 
 const Login = () => {
   const { userLogin, setLoading, googleAuthentication } =
@@ -65,6 +66,10 @@ const Login = () => {
 
   return (
     <div className="max-width mx-auto px-5 font-roboto text-textColor">
+      <Helmet>
+        <title>Login | Tastr</title>
+      </Helmet>
+
       <div className=" w-full max-w-xs md:max-w-sm mx-auto py-28">
         <p className="text-blue-500 text-center text-base">Welcome back!</p>
         <h1 className="text-center font-semibold text-3xl mt-4 mb-2">

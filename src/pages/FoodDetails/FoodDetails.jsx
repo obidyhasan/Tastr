@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { Link, useLoaderData } from "react-router-dom";
 
 const FoodDetails = () => {
@@ -15,6 +16,10 @@ const FoodDetails = () => {
 
   return (
     <div className="max-width mx-auto px-5 py-5 ">
+      <Helmet>
+        <title>Food Details | Tastr</title>
+      </Helmet>
+
       <div className="flex gap-5 flex-col md:flex-row border border-base-200 p-5 rounded-lg ">
         <div className="w-full md:w-2/5">
           <figure className="w-full h-full">

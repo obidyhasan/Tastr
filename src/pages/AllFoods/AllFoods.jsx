@@ -3,6 +3,7 @@ import FoodCard from "../../components/FoodCard";
 import { useEffect } from "react";
 import axios from "axios";
 import { FiSearch } from "react-icons/fi";
+import { Helmet } from "react-helmet";
 
 const AllFoods = () => {
   const [foods, setFoods] = useState([]);
@@ -76,6 +77,9 @@ const AllFoods = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>All Foods | Tastr</title>
+      </Helmet>
       <div className="w-full bg-all-food-bg h-72 bg-no-repeat bg-center bg-cover flex flex-col items-center justify-center px-5">
         <h1 className="text-white font-bold sm:text-5xl text-4xl text-center">
           All Foods

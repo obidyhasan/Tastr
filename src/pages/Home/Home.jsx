@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import Navbar from "../../components/Navbar";
 import ActionSection from "./ActionSection";
 import BannerSection from "./BannerSection";
@@ -9,6 +10,9 @@ import TopFoodsSection from "./TopFoodsSection";
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <title>Home | Tastr</title>
+      </Helmet>
       <div className="w-full min-h-screen bg-banner-bg bg-no-repeat bg-cover bg-center text-white">
         <nav className="w-full fixed top-0 z-20">
           <Navbar></Navbar>

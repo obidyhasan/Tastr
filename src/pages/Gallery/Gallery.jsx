@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import Lightbox from "yet-another-react-lightbox";
 import { Fullscreen, Slideshow } from "yet-another-react-lightbox/plugins";
 import "yet-another-react-lightbox/styles.css";
@@ -26,6 +27,10 @@ const Gallery = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Gallery | Tastr</title>
+      </Helmet>
+
       <Lightbox
         open={openLightbox}
         close={() => setOpenLightbox(false)}

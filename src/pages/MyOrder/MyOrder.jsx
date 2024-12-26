@@ -4,6 +4,7 @@ import moment from "moment";
 import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const MyOrder = () => {
   const { user } = useAuth();
@@ -55,6 +56,9 @@ const MyOrder = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>My Order | Tastr</title>
+      </Helmet>
       <div className="w-full bg-order-bg h-72 bg-no-repeat bg-center bg-cover flex flex-col items-center justify-center px-5">
         <h1 className="text-white font-bold sm:text-5xl text-4xl text-center">
           My Orders

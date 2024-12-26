@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { showErrorMessage, showSuccessMessage } from "../../utility/toastUtils";
+import { Helmet } from "react-helmet";
 
 const Purchase = () => {
   const loaderData = useLoaderData();
@@ -62,6 +63,9 @@ const Purchase = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Purchase | Tastr</title>
+      </Helmet>
       <div className="w-full bg-food-purchase-bg h-72 bg-no-repeat bg-center bg-cover flex flex-col items-center justify-center px-5">
         <h1 className="text-white font-bold sm:text-5xl text-4xl text-center">
           Checkout
