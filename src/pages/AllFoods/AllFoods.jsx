@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet";
 
 const AllFoods = () => {
   const [foods, setFoods] = useState([]);
+  const [sort, setSort] = useState(false);
   const [searchFood, setSearchFood] = useState("");
   // Pagination
   const [currentPage, setCurrentPage] = useState(0);
@@ -25,13 +26,13 @@ const AllFoods = () => {
   useEffect(() => {
     axios
       .get(
-        `https://tastr-server.vercel.app/api/foods?page=${currentPage}&size=${itemPerPage}`
+        `https://tastr-server.vercel.app/api/foods?page=${currentPage}&size=${itemPerPage}&sort=${sort}`
       )
       .then((res) => setFoods(res.data))
       .catch((error) => {
         console.log(error);
       });
-  }, [currentPage, itemPerPage]);
+  }, [currentPage, itemPerPage, sort]);
 
   useEffect(() => {
     axios
@@ -95,7 +96,7 @@ const AllFoods = () => {
         <p className="text-gray-500 mt-2">
           {`Type in your cravings and find exactly what you're looking for.`}
         </p>
-        <div className="mt-5 flex justify-center">
+        <div className="mt-5 flex flex-wrap sm:flex-nowrap justify-center gap-4">
           <label className="input input-bordered rounded-full w-full max-w-2xl flex items-center gap-2">
             <input
               onChange={(e) => handelOnSearch(e.target.value)}
@@ -104,6 +105,16 @@ const AllFoods = () => {
               placeholder="Search"
             />
             <FiSearch></FiSearch>
+          </label>
+          <label>
+            <button
+              onClick={() => setSort(!sort)}
+              className={`btn input-bordered btn-outline rounded-full ${
+                sort && "bg-primary text-base-200"
+              }`}
+            >
+              Sort by Price
+            </button>
           </label>
         </div>
       </div>
@@ -130,7 +141,7 @@ const AllFoods = () => {
               )}
             </div>
 
-            <div className="flex justify-center gap-4 mb-10">
+            <div className="flex justify-center gap-4 mb-10 flex-wrap">
               <button onClick={handelPrevPage} className="btn">
                 Prev
               </button>
