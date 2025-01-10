@@ -4,7 +4,7 @@ const BannerSection = () => {
   return (
     <div className="w-full banner-height flex items-center justify-center ">
       <div className="max-width px-5 py-10 mx-auto flex items-center justify-center flex-col gap-8">
-        <h1 className="font-bold md:font-extrabold text-5xl md:text-8xl text-center max-w-4xl">
+        <h1 className="font-bold md:font-extrabold text-5xl md:text-7xl text-center max-w-3xl">
           <span className="outline-text text-transparent ">
             Where Every Bite
           </span>{" "}

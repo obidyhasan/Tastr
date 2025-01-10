@@ -9,7 +9,7 @@
 }
 
 .banner-height {
-  min-height: calc(100vh - 70px);
+  min-height: calc(70vh - 70px);
 }
 
 .outline-text {

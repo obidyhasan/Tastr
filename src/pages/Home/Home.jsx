@@ -13,7 +13,7 @@ const Home = () => {
       <Helmet>
         <title>Home | Tastr</title>
       </Helmet>
-      <div className="w-full min-h-screen bg-banner-bg bg-no-repeat bg-cover bg-center text-white">
+      <div className="w-full banner-height bg-banner-bg bg-no-repeat bg-cover bg-center text-white">
         <nav className="w-full fixed top-0 z-20">
           <Navbar></Navbar>
         </nav>
