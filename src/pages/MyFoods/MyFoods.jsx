@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import MyFoodCard from "../../components/MyFoodCard";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
+import MyFoodCard from "../../components/MyFoodCard";
 
 const MyFoods = () => {
   const { user } = useAuth();
@@ -48,10 +48,30 @@ const MyFoods = () => {
                 Foods Not Found
               </h2>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-                {foods.map((food) => (
-                  <MyFoodCard key={food._id} food={food}></MyFoodCard>
-                ))}
+              <div className="overflow-x-auto">
+                <table className="table">
+                  {/* head */}
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Food</th>
+                      <th>Price</th>
+                      <th>Origin</th>
+                      <th>Quantity</th>
+                      <th>Sold</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {foods.map((food, idx) => (
+                      <MyFoodCard
+                        key={food._id}
+                        food={food}
+                        idx={idx}
+                      ></MyFoodCard>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             )}
           </div>

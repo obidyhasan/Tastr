@@ -4,7 +4,7 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 import useAuth from "../hooks/useAuth";
 import { showErrorMessage, showSuccessMessage } from "../utility/toastUtils";
 
-const MyFoodCard = ({ food }) => {
+const MyFoodCard = ({ food, idx }) => {
   const updateModal = useRef(null);
   const [updateFood, setUpdateFood] = useState(food);
   const axiosInstance = useAxiosSecure();
@@ -60,43 +60,43 @@ const MyFoodCard = ({ food }) => {
   }
 
   return (
-    <div className="rounded-xl border border-base-200 p-4 flex flex-col gap-5">
-      <div className="flex-1">
-        <figure>
-          <img
-            src={image}
-            className="w-full h-[200px] object-cover rounded-md"
-            alt=""
-          />
-        </figure>
-
-        <div className="mt-4 flex flex-col gap-3">
-          <span className="badge badge-md">{category}</span>
-          <div className="flex justify-between items-center gap-2">
-            <h1 className="font-semibold text-xl">{name}</h1>
-            <p className="font-semibold text-lg text-orange-500">${price}</p>
+    <>
+      <tr>
+        <th>{idx + 1}</th>
+        <td>
+          <div className="flex items-center gap-3">
+            <div className="avatar">
+              <div className="mask mask-squircle h-12 w-12">
+                <img src={food.image} alt="Avatar Tailwind CSS Component" />
+              </div>
+            </div>
+            <div>
+              <div className="font-bold">{food.name}</div>
+              <div className="text-sm mt-1">
+                <span className="badge badge-md">{food.category}</span>
+              </div>
+            </div>
           </div>
-          <p className="line-clamp-2 text-gray-500 text-sm">{description}</p>
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-3">
-        <p>
-          Origin: <span className="font-medium">{origin}</span>
-        </p>
-        <hr className="border-base-200" />
-        <div className="flex justify-between items-center gap-2">
-          <span className="badge badge-md badge-neutral">
-            {purchaseCount} sold
-          </span>
-          <p>
-            Quantity: <span className="font-medium">{quantity}</span>
-          </p>
-        </div>
-        <button onClick={() => updateModal.current.showModal()} className="btn">
-          Update Food
-        </button>
-      </div>
+        </td>
+        <td className="font-semibold text-orange-500 text-sm">
+          $ {food.price}
+        </td>
+        <td>{food.origin}</td>
+        <td>
+          <span className="badge">{food.quantity}</span>
+        </td>
+        <td>
+          <span className="badge">{food.purchaseCount}</span>
+        </td>
+        <td>
+          <button
+            onClick={() => updateModal.current.showModal()}
+            className="btn"
+          >
+            Update Food
+          </button>
+        </td>
+      </tr>
 
       {/* Open the modal using document.getElementById('ID').showModal() method */}
 
@@ -226,7 +226,7 @@ const MyFoodCard = ({ food }) => {
                 </div>
 
                 <div className="form-control pt-4">
-                  <button className="btn ">Add Your Food</button>
+                  <button className="btn ">Update Your Food</button>
                 </div>
               </form>
             </div>
@@ -236,12 +236,13 @@ const MyFoodCard = ({ food }) => {
           <button>close</button>
         </form>
       </dialog>
-    </div>
+    </>
   );
 };
 
 MyFoodCard.propTypes = {
   food: PropTypes.object,
+  idx: PropTypes.number,
 };
 
 export default MyFoodCard;
