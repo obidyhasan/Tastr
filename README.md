@@ -6,9 +6,15 @@ Welcome to **Tastr**, a vibrant and interactive website designed to explore and 
 
 The purpose of this project is to provide a seamless platform for food enthusiasts to browse through an extensive menu, learn about cuisines, and order their favorite meals.
 
+![RealtyFlow Screenshot](https://i.ibb.co.com/rMQGZfQ/Tastr-12-26-2024-01-56-PM.png) <!-- Add your screenshot link here -->
+
 ## Live URL
 
 Check out the live website here: [Tastr Live](https://tastr-client.web.app)
+
+## Server Site Repository Link:
+
+[Server Site Repository](https://github.com/obidyhasan/Tastr-Server)
 
 ## Key Features
 
@@ -54,8 +60,6 @@ Check out the live website here: [Tastr Live](https://tastr-client.web.app)
    cd repository
    ```
 
----
-
 ### 2. Install Dependencies
 
 1. Ensure you are inside the project directory.
@@ -63,8 +67,6 @@ Check out the live website here: [Tastr Live](https://tastr-client.web.app)
    ```bash
    npm install
    ```
-
----
 
 ### 3. Additional Commands
 
