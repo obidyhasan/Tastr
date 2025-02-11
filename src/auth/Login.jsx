@@ -1,6 +1,6 @@
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AuthContext from "../contexts/AuthContext";
 import { showErrorMessage, showSuccessMessage } from "../utility/toastUtils";
 import { Helmet } from "react-helmet";
@@ -10,9 +10,11 @@ const Login = () => {
     useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const [btnLoading, setBtnLoading] = useState(false);
 
   function handelOnSubmit(e) {
     e.preventDefault();
+    setBtnLoading(true);
 
     const email = e.target.email.value;
     const password = e.target.password.value;
@@ -35,12 +37,14 @@ const Login = () => {
               : "/"
           }`
         );
+        setBtnLoading(false);
       })
       .catch((error) => {
         setLoading(false);
         e.target.reset();
         showErrorMessage("Invalid email or password. Try again");
         console.log(error);
+        setBtnLoading(false);
       });
   }
 
@@ -118,9 +122,18 @@ const Login = () => {
             />
           </div>
           <div className="form-control mt-5">
-            <button className="btn rounded bg-textColor border-none text-primary">
-              Login
-            </button>
+            {btnLoading ? (
+              <button
+                disabled
+                className="btn rounded bg-textColor border-none text-primary"
+              >
+                <span className="loading loading-spinner"></span> Login
+              </button>
+            ) : (
+              <button className="btn rounded bg-textColor border-none text-primary">
+                Login
+              </button>
+            )}
           </div>
         </form>
 
