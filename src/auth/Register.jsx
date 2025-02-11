@@ -3,15 +3,18 @@ import useAuth from "../hooks/useAuth";
 import { showErrorMessage, showSuccessMessage } from "../utility/toastUtils";
 import { Helmet } from "react-helmet";
 import useAxiosPublic from "../components/useAxiosPublic";
+import { useState } from "react";
 
 const Register = () => {
   const { userRegister, userProfileUpdate, setLoading } = useAuth();
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
   const API_KEY = import.meta.env.VITE_IMGBB_API_KEY;
+  const [btnLoading, setBtnLoading] = useState(false);
 
   function handelUserRegister(e) {
     e.preventDefault();
+    setBtnLoading(true);
 
     const form = e.target;
     const email = form.email.value;
@@ -58,22 +61,26 @@ const Register = () => {
                   setLoading(false);
                   showSuccessMessage("Register successfully");
                   navigate("/");
+                  setBtnLoading(false);
                 })
                 .catch((error) => {
                   setLoading(false);
                   console.log(error);
+                  setBtnLoading(false);
                 });
             })
             .catch((error) => {
               setLoading(false);
               showErrorMessage("Something went wrong!");
               console.log(error);
+              setBtnLoading(false);
             });
         }
       })
       .catch((error) => {
         console.log(error);
         showErrorMessage(error.message);
+        setBtnLoading(false);
       });
   }
 
@@ -146,9 +153,19 @@ const Register = () => {
             />
           </div>
           <div className="form-control mt-5">
-            <button className="btn text-primary rounded bg-textColor border-none">
-              Submit & Register
-            </button>
+            {btnLoading ? (
+              <button
+                disabled
+                className="btn text-primary rounded bg-textColor border-none"
+              >
+                <span className="loading loading-spinner"></span>
+                Submit & Register
+              </button>
+            ) : (
+              <button className="btn text-primary rounded bg-textColor border-none">
+                Submit & Register
+              </button>
+            )}
           </div>
         </form>
 
