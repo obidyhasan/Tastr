@@ -2,10 +2,13 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { showErrorMessage, showSuccessMessage } from "../utility/toastUtils";
 import { Helmet } from "react-helmet";
+import useAxiosPublic from "../components/useAxiosPublic";
 
 const Register = () => {
   const { userRegister, userProfileUpdate, setLoading } = useAuth();
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
+  const API_KEY = import.meta.env.VITE_IMGBB_API_KEY;
 
   function handelUserRegister(e) {
     e.preventDefault();
@@ -32,30 +35,45 @@ const Register = () => {
 
     const formData = new FormData();
     formData.append("image", photo);
+    axiosPublic
+      .post(`https://api.imgbb.com/1/upload?key=${API_KEY}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((result) => {
+        if (result.data.success) {
+          const image_url = result.data?.data?.display_url;
 
-    userRegister(email, password)
-      .then(() => {
-        setLoading(false);
-        const userInfo = {
-          displayName: name,
-          photoURL: photo,
-        };
+          userRegister(email, password)
+            .then(() => {
+              setLoading(false);
+              const userInfo = {
+                displayName: name,
+                photoURL: image_url,
+              };
 
-        userProfileUpdate(userInfo)
-          .then(() => {
-            setLoading(false);
-            showSuccessMessage("Register successfully");
-            navigate("/");
-          })
-          .catch((error) => {
-            setLoading(false);
-            console.log(error);
-          });
+              userProfileUpdate(userInfo)
+                .then(() => {
+                  setLoading(false);
+                  showSuccessMessage("Register successfully");
+                  navigate("/");
+                })
+                .catch((error) => {
+                  setLoading(false);
+                  console.log(error);
+                });
+            })
+            .catch((error) => {
+              setLoading(false);
+              showErrorMessage("Something went wrong!");
+              console.log(error);
+            });
+        }
       })
       .catch((error) => {
-        setLoading(false);
-        showErrorMessage("Something went wrong!");
         console.log(error);
+        showErrorMessage(error.message);
       });
   }
 
