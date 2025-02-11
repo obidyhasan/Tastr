@@ -81,13 +81,13 @@ const AddFood = () => {
               </div>
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Food Image URL</span>
+                  <span className="label-text">Food Image</span>
                 </label>
+
                 <input
-                  type="text"
                   name="image"
-                  placeholder="food image url"
-                  className="input input-bordered"
+                  type="file"
+                  className="file-input file-input-bordered w-full "
                   required
                 />
               </div>
