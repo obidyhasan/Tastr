@@ -13,7 +13,7 @@ const Register = () => {
     const form = e.target;
     const email = form.email.value;
     const name = form.name.value;
-    const photo = form.photo.value;
+    const photo = form.photo.files[0];
     const password = form.password.value;
 
     // Password Validation
@@ -29,6 +29,9 @@ const Register = () => {
     if (!lowercaseRegex.test(password)) {
       return showErrorMessage("Must have a Lowercase letter in the password");
     }
+
+    const formData = new FormData();
+    formData.append("image", photo);
 
     userRegister(email, password)
       .then(() => {
@@ -101,13 +104,13 @@ const Register = () => {
           </div>
           <div className="form-control">
             <label className="mb-2">
-              <span className="label-text text-gray-600">Photo URL *</span>
+              <span className="label-text text-gray-600">Profile Photo *</span>
             </label>
+
             <input
-              type="text"
+              type="file"
               name="photo"
-              placeholder="photo url"
-              className="input rounded input-bordered"
+              className="file-input rounded file-input-bordered w-full"
               required
             />
           </div>
