@@ -4,12 +4,15 @@ import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { showErrorMessage, showSuccessMessage } from "../../utility/toastUtils";
 import { Helmet } from "react-helmet";
+import useAxiosPublic from "../../components/useAxiosPublic";
 
 const AddFood = () => {
   const { user } = useAuth();
   const axiosInstance = useAxiosSecure();
   const navigate = useNavigate();
   const [category, setCategory] = useState("Choose your Category");
+  const axiosPublic = useAxiosPublic();
+  const API_KEY = import.meta.env.VITE_IMGBB_API_KEY;
 
   function handelAddFoodSubmit(e) {
     e.preventDefault();
@@ -21,6 +24,8 @@ const AddFood = () => {
     foodInfo.addByName = user?.displayName;
     foodInfo.addByEmail = user?.email;
     foodInfo.purchaseCount = 0;
+
+    const imageFile = e.target.image.files[0];
 
     // Validation -> quantity, price, category
     if (category === "Choose your Category") {
@@ -37,15 +42,34 @@ const AddFood = () => {
       );
     }
 
-    axiosInstance
-      .post(`/api/foods?email=${user?.email}`, foodInfo)
-      .then((res) => {
-        if (res.data.insertedId) {
-          showSuccessMessage("Food Added Successfully");
-          navigate("/my-foods");
+    const formDataImg = new FormData();
+    formDataImg.append("image", imageFile);
+
+    axiosPublic
+      .post(`https://api.imgbb.com/1/upload?key=${API_KEY}`, formDataImg, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((result) => {
+        if (result.data.success) {
+          const image_url = result.data?.data?.display_url;
+          foodInfo.image = image_url;
+          axiosInstance
+            .post(`/api/foods?email=${user?.email}`, foodInfo)
+            .then((res) => {
+              if (res.data.insertedId) {
+                showSuccessMessage("Food Added Successfully");
+                navigate("/my-foods");
+              }
+            })
+            .catch((error) => console.log(error));
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        showErrorMessage(error.message);
+      });
   }
 
   return (
